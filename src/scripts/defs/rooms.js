@@ -1,7 +1,7 @@
 (function(CC){
     "use strict";
     CC.defs = CC.defs || {};
-    CC.defs.sounds = (function(){
+    CC.defs.rooms = (function(){
         return [
         ];
     })();
