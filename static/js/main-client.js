@@ -135,9 +135,22 @@
             var totalAssetCount = sounds.length + sprites.length + rooms.length;
             var loadedCount = 0;
 
-            var currAsset = { path: "<<PATH>>", name: "NAME" };
-            drawAssetLoading( currAsset.name, currAsset.path, loadedCount, totalAssetCount);
+//.            var currAsset = { path: "<<PATH>>", name: "NAME" };
+          
+            rooms.forEach( function (room) {
+              drawAssetLoading( room.name, room.path, loadedCount, totalAssetCount);
+              loadedCount++;
+            });
+            
+            sprites.forEach( function (sprite) {
+              drawAssetLoading( sprite.name, sprite.path, loadedCount, totalAssetCount);
+              loadedCount++;
+            });
 
+            sounds.forEach( function( sound ) {
+              drawAssetLoading( sound.name, sound.path, loadedCount, totalAssetCount);
+              loadedCount++;
+            });
         }
 
         function onInput( cb ) {
