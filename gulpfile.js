@@ -15,11 +15,31 @@ gulp.task('styles', function() {
                                     .pipe(notify({ message: 'Styles task complete'}));
 });
 
-gulp.task('scripts', function() {
-    return gulp.src('src/scripts/**/*.js')
+gulp.task('scripts-defs', function() {
+    return gulp.src('src/scripts/defs/**/*.js')
                                      .pipe(jshint('.jshintrc'))
                                      .pipe(jshint.reporter('default'))
-                                     .pipe(concat('main.js'))
+                                     .pipe(concat('main-defs.js'))
+                                     .pipe(gulp.dest('static/js'))
+                                     .pipe(rename({suffix: '.min'}))
+                                     .pipe(gulp.dest('static/js'))
+                                     .pipe(notify({ message: 'Scripts task complete' }));
+});
+gulp.task('scripts-client', function() {
+    return gulp.src('src/scripts/client/**/*.js')
+                                     .pipe(jshint('.jshintrc'))
+                                     .pipe(jshint.reporter('default'))
+                                     .pipe(concat('main-client.js'))
+                                     .pipe(gulp.dest('static/js'))
+                                     .pipe(rename({suffix: '.min'}))
+                                     .pipe(gulp.dest('static/js'))
+                                     .pipe(notify({ message: 'Scripts task complete' }));
+});
+gulp.task('scripts-server', function() {
+    return gulp.src('src/scripts/server/**/*.js')
+                                     .pipe(jshint('.jshintrc'))
+                                     .pipe(jshint.reporter('default'))
+                                     .pipe(concat('main-server.js'))
                                      .pipe(gulp.dest('static/js'))
                                      .pipe(rename({suffix: '.min'}))
                                      .pipe(gulp.dest('static/js'))
@@ -31,5 +51,5 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('styles','scripts');
+    gulp.start('styles','scripts-defs', 'scripts-client', 'scripts-server');
 });

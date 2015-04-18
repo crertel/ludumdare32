@@ -10,7 +10,12 @@ html, body {
 }
 
 #game-window {
-    background-color: #fff;
+    background-color: #000;
     width: 900px;
     height: 600px;
+}
+
+#header {
+    color: #b33;
+    text-align: center;
 }

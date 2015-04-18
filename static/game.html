@@ -5,12 +5,25 @@
         <script>
             var CC = {};
         </script>
-        <script src="js/main.js"></script>
+        <script src="js/main-defs.js"></script>
+        <script src="js/main-client.js"></script>
     </head>
     <body>
+        <div id="header">
+            <h1> Clingy Cat </h1>
+            <h2> Psychological War-furr</h2>
+        </div>
         <div id="game-window-container">
             <canvas id="game-window" width="900" height="600">
             </canvas>
         </div>
+        <script>
+            CC.engine.init();
+            CC.engine.onInput( function (evt) {
+                console.log(evt);
+            });
+            CC.engine.precacheAssets( CC.cache, CC.defs )
+            CC.server.init();
+        </script>
     </body>
 </html>
