@@ -103,14 +103,32 @@
 
         function drawScene( scene ) {
             //TODOTODO draw scene
+            ctx.save();
+            ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
             
             // draw room
+            if (scene.room) {
+                var room = CC.cache.getRoom( scene.room.name );
+            }
             
-            // draw items
+            // draw sprites
+            if (scene.sprites) {
+                scene.sprites.forEach( function _renderSprite( sprite) {
+                    //sprite
+                });
+            }
             
             // draw text
+            if (scene.text) {
+                scene.text.forEach( function _renderText( text ) {
+                });
+            }
             
             // draw hud
+            if (scene.hud) {
+            }
+           
+            ctx.restore();
         }
 
         return {
