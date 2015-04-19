@@ -8,17 +8,22 @@
             {
                 name: "Kitchen",
                 path: "rooms/Kitchen.png",
-                portals: [{to: "LivingRoom"}]
+                portals: [{to: "LivingRoom", x:800, y:200}],
+                objects: [{x:450, y:500, name:"@SPAWN"},
+                          {x:800, y:500, name:"cat_bowl"} ]
             },
             {
                 name: "LivingRoom",
                 path: "rooms/LivingRoom.png",
-                portals: [{to: "DoorWay"}, { to:"Kitchen"}]
+                portals: [{to: "DoorWay"},
+                          {to:"Kitchen"}],
+                objects: []
             },
             {
                 name: "DoorWay",
                 path: "rooms/DoorWay.png",
-                portals: [{to: "LivingRoom"}, {to:"EntryWay"} ]
+                portals: [{to: "LivingRoom"} ],
+                objects: []
             }
         ];
     })();

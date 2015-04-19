@@ -73,12 +73,26 @@
         function dispatchKeyUp(e) {
             var evt;
             switch(e.which) {
-                case k_down: evt = { action: "down" };  break;
-                case k_left: evt = { action: "left" };  break;                             
-                case k_up:   evt = { action: "up" };    break;
-                case k_right:evt = { action: "right" }; break;
+                case k_down: evt = { action: "stopDown" };  break;
+                case k_left: evt = { action: "stopLeft" };  break;                             
+                case k_up:   evt = { action: "stopUp" };    break;
+                case k_right:evt = { action: "stopRight" }; break;
                 case k_start:evt = { action: "start" }; break;
                 case k_stop: evt = { action: "stop" }; break;
+                default: /* weird key */ break;
+            }
+            if (evt) {
+                evt.time = Date.now();
+                inputHandler(evt);
+            }
+        }
+        function dispatchKeyDown(e) {
+            var evt;
+            switch(e.which) {
+                case k_down: evt = { action: "startDown" };  break;
+                case k_left: evt = { action: "startLeft" };  break;                             
+                case k_up:   evt = { action: "startUp" };    break;
+                case k_right:evt = { action: "startRight" }; break;
                 default: /* weird key */ break;
             }
             if (evt) {
@@ -90,6 +104,7 @@
         function init() {
             // setup input handlers
             window.onkeyup = dispatchKeyUp;
+            window.onkeydown = dispatchKeyDown;
 
             // grab drawing context
             ctx = document.getElementById("game-window").getContext('2d');
@@ -175,15 +190,21 @@
             if (scene.room) {
                 var room = CC.cache.getImage( scene.room.name );
                 ctx.drawImage( room, 0,0, ctx.canvas.width, ctx.canvas.height);
+                
+                // draw sprites
+                if (scene.room.objects) {
+                    scene.room.objects.forEach( function _renderObject( object ) {
+                        if (object.name !== "@PLAYER") {
+                            var sprite = CC.cache.getImage( object.name );
+                            ctx.drawImage( sprite, object.x, object.y);
+                        } else {
+                            ctx.fillStyle = "#0F0";
+                            ctx.fillRect( object.x, object.y, 20, 20);
+                        }
+                    });
+                }
             }
             
-            // draw sprites
-            if (scene.objects) {
-                scene.objects.forEach( function _renderObject( object ) {
-                    var sprite = CC.cache.getImage( objecte.name );
-                    ctx.drawImage( sprite, object.x, object.y);
-                });
-            }
             
             // draw text
             if (scene.text) {

@@ -24,7 +24,7 @@
 
         CS.server = (function(){
             var isRunning = false;
-            var k_logicRate = 2000; // 10 Hz
+            var k_logicRate = 50; // 20 Hz
             var lastTime = Date.now();
             var currTime = Date.now();
             var dt = 0;
@@ -55,7 +55,7 @@
                     dt = currTime - lastTime;
                     lastTime = currTime;
                     runTimeout =  self.setTimeout( run, k_logicRate );
-//                    console.log("run");
+                    CS.game.update(dt);
                     self.postMessage( {
                         type: "sceneUpdate",
                         data: {
@@ -66,7 +66,7 @@
             }
 
             function handleInput( evt ) {
-                console.log(evt);
+                CS.game.handleInput(evt);
             }
 
             function handleMessage( msg ) {
