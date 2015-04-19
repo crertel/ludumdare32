@@ -87,8 +87,14 @@
                 if (p_movingDown) { y = 1; }
                 if (p_movingLeft) { x = -1; }
                 if (p_movingRight) { x = 1; }
+
+                p_player.anim = "idle";
+                if (x > 0) { p_player.anim = "walkLeft"; }
+                if (x < 0) { p_player.anim = "walkRight"; }
+                if (y > 0) { p_player.anim = "walkDown"; }
+                if (y < 0) { p_player.anim = "walkUp"; }
                 
-                var scale = dt*k_playerMoveSpeed * Math.sqrt(x*x + y*y);
+                var scale = dt*k_playerMoveSpeed / ( Math.sqrt(x*x + y*y) || 1);
                 p_player.x += x*scale;
                 p_player.y += y*scale;
             }
@@ -97,7 +103,6 @@
             var p_movingDown = false;
             var p_movingLeft = false;
             var p_movingRight = false;
-
 
             function handleInput(evt){
                 switch(evt.action) {

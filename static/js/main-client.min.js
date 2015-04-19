@@ -56,7 +56,7 @@
     })();
 })(window.CC);
 
-(function(CC){
+(function(CC,CD){
     "use strict";
     CC.engine = (function(){
         var inputHandler = function(){};
@@ -181,6 +181,33 @@
             inputHandler = cb;
         }
 
+        function drawSprite( name, animation, x, y,t ) {
+            var sprite = CC.cache.getImage( name );
+
+            var spriteDef;
+            for (var i = 0; i < CD.sprites.length; i++) {
+                if (CD.sprites[i].name === name) {
+                    spriteDef = CD.sprites[i];
+                    break;
+                }
+            }
+
+            if (!spriteDef || !spriteDef.animations[animation]) {
+                ctx.drawImage( sprite, x, y);
+            } else {
+                var frames = spriteDef.animations[animation];
+                ctx.drawImage( sprite,
+                               frames[0].x,
+                               frames[0].y,
+                               frames[0].w,
+                               frames[0].h,
+                               x,
+                               y,
+                               frames[0].w,
+                               frames[0].h);
+            }
+        }
+
         function drawScene( scene ) {
             //TODOTODO draw scene
             ctx.save();
@@ -196,10 +223,12 @@
                     scene.room.objects.forEach( function _renderObject( object ) {
                         if (object.name !== "@PLAYER") {
                             var sprite = CC.cache.getImage( object.name );
-                            ctx.drawImage( sprite, object.x, object.y);
+//                            ctx.drawImage( sprite, object.x, object.y);
                         } else {
                             ctx.fillStyle = "#0F0";
-                            ctx.fillRect( object.x, object.y, 20, 20);
+                            drawSprite("cat", object.anim, object.x, object.y,0);
+//                            ctx.fillRect( object.x, object.y, 20, 20);
+                           
                         }
                     });
                 }
@@ -226,7 +255,7 @@
             precacheAssets: precacheAssets
         };
     })();
-})(window.CC);
+})(window.CC,window.CD);
 
 (function(CC) {
     "use strict";
