@@ -1,12 +1,23 @@
 (function(CC) {
     "use strict";
     CC.server = (function(){
+        var worker = null;
+
+        function handleServerMessage( msg ){
+            msg = msg.data || {};
+            switch (msg.type) {
+                case "log": console.log("Server: ", msg.data); break;
+                default: console.log("Unknown message ", msg); break;
+            }
+        }
+
         function init(){
-            console.log("Initialized server.");
+            worker = new Worker("js/main-server.min.js");
+            worker.onmessage = handleServerMessage;
         }
 
         function handleInput(evt) {
-            console.log("Event: ", evt);
+            worker.postMessage( { type: "input", data: evt } );
         }
 
         function getScene(){
