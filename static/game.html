@@ -22,8 +22,13 @@
             CC.engine.onInput( function (evt) {
                 console.log(evt);
             });
-            CC.engine.precacheAssets( CC.cache, CC.defs )
+            CC.engine.precacheAssets( CC.cache, CD) ;    
             CC.server.init();
+            CC.engine.onInput( CC.server.handleInput );
+
+            setInterval( function _doScene() {
+                CC.engine.drawScene( CC.server.getScene() );
+            }, (1/30) * 1000);
         </script>
     </body>
 </html>

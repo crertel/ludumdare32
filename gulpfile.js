@@ -17,7 +17,7 @@ gulp.task('styles', function() {
 
 gulp.task('scripts-defs', function() {
     return gulp.src('src/scripts/defs/**/*.js')
-                                     .pipe(jshint('.jshintrc'))
+                                     .pipe(jshint('.defs.jshintrc'))
                                      .pipe(jshint.reporter('default'))
                                      .pipe(concat('main-defs.js'))
                                      .pipe(gulp.dest('static/js'))
@@ -27,7 +27,7 @@ gulp.task('scripts-defs', function() {
 });
 gulp.task('scripts-client', function() {
     return gulp.src('src/scripts/client/**/*.js')
-                                     .pipe(jshint('.jshintrc'))
+                                     .pipe(jshint('.client.jshintrc'))
                                      .pipe(jshint.reporter('default'))
                                      .pipe(concat('main-client.js'))
                                      .pipe(gulp.dest('static/js'))
@@ -37,7 +37,7 @@ gulp.task('scripts-client', function() {
 });
 gulp.task('scripts-server', function() {
     return gulp.src('src/scripts/server/**/*.js')
-                                     .pipe(jshint('.jshintrc'))
+                                     .pipe(jshint('.server.jshintrc'))
                                      .pipe(jshint.reporter('default'))
                                      .pipe(concat('main-server.js'))
                                      .pipe(gulp.dest('static/js'))

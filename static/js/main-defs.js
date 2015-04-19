@@ -1,28 +1,39 @@
-(function(CC){
+(function(self){
     "use strict";
-    CC.defs = CC.defs || {};
-    CC.defs.rooms = (function(){
-        return [
-            { name: "kitten", path: "rooms/kitten.jpg" } 
-            
-        ];
-    })();
-})(window.CC);
 
-(function(CC){
-    "use strict";
-    CC.defs = CC.defs || {};
-    CC.defs.sprites = (function(){
-        return [
+    self.CD = self.CD || {};
+    var CD = self.CD;
+    CD.rooms = (function(){
+        return [ 
+            {   name: "EntryWay",
+                path: "rooms/EntryWay.png",
+                portals: [{ to: "kitten" }]
+            },
+            {   name: "kitten",
+                path: "rooms/kitten.jpg",
+                portals: [{ to: "EntryWay"}]
+            }
         ];
     })();
-})(window.CC);
+})( (typeof window === "undefined")?self:window);
 
-(function(CC){
+(function(self){    
     "use strict";
-    CC.defs = CC.defs || {};
-    CC.defs.sprites = (function(){
+
+    self.CD = self.CD || {};    
+    var CD = self.CD;
+    CD.sprites = (function(){
         return [
         ];
     })();
-})(window.CC);
+})( (typeof window === "undefined")?self:window);
+
+(function(self){
+    "use strict";
+    self.CD = self.CD || {};
+    var CD = self.CD;
+    CD.sprites = (function(){
+        return [
+        ];
+    })();
+})( (typeof window === "undefined")?self:window);
