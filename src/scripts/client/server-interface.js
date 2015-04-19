@@ -6,7 +6,7 @@
         function handleServerMessage( msg ){
             msg = msg.data || {};
             switch (msg.type) {
-                case "log": console.log("Server: ", msg.data); break;
+                case "log": console.log(msg.data); break;
                 default: console.log("Unknown message ", msg); break;
             }
         }
@@ -17,7 +17,11 @@
         }
 
         function handleInput(evt) {
-            worker.postMessage( { type: "input", data: evt } );
+            switch (evt.action) {
+                case "start": worker.postMessage( {type: "startGame" } ); break;
+                case "stop": worker.postMessage( {type: "stopGame"});break;
+                default: worker.postMessage( { type: "input", data: evt } ); break;
+            }
         }
 
         function getScene(){

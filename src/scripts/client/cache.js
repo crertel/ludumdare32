@@ -2,7 +2,7 @@
     "use strict";
     
     CC.cache = (function(){
-    var spriteCache = Object.create(null);
+    var imageCache = Object.create(null);
     var soundCache = Object.create(null);
 
     function fetchFileAsync( path, onSuccess ) {
@@ -19,26 +19,28 @@
         r.send();
     }
 
-    function addSprite( name, path ) {
-        spriteCache[name] = null;
+    function addImage( name, path, success ) {
+        imageCache[name] = null;
         fetchFileAsync(path, function(blob){
             var img = new Image();
             img.src = window.URL.createObjectURL( blob);
-            spriteCache[name] = img;
+            imageCache[name] = img;
+            success();
         });
     }
 
-    function addSound( name, path ) {
-        spriteCache[name] = null;
+    function addSound( name, path, success) {
+        soundCache[name] = null;
         fetchFileAsync(path, function(blob){
             // TODOTODO
             // load sound
             soundCache[name] = blob;
+            success();
         });
     }
 
-    function getSprite( name ){ 
-        return spriteCache[name];
+    function getImage( name ){ 
+        return imageCache[name];
     }
 
     function getSound( name ) {
@@ -46,10 +48,10 @@
     }
 
     return {
-        addSprite: addSprite,
-        getSprite: getSprite,
+        addImage: addImage,
+        getImage: getImage,
         addSound: addSound,
-        getSound: getSound
+        getSound: getSound,
     };
     })();
 })(window.CC);

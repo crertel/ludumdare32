@@ -7,6 +7,8 @@
         var k_left = 65;
         var k_up = 87;
         var k_down = 83;
+        var k_stop = 27;
+        var k_start = 13;
 
         var ctx;
 
@@ -17,6 +19,8 @@
                 case k_left: evt = { action: "left" };  break;                             
                 case k_up:   evt = { action: "up" };    break;
                 case k_right:evt = { action: "right" }; break;
+                case k_start:evt = { action: "start" }; break;
+                case k_stop: evt = { action: "stop" }; break;
                 default: /* weird key */ break;
             }
             if (evt) {
@@ -78,21 +82,24 @@
             // calculate number of things
             var totalAssetCount = sounds.length + sprites.length + rooms.length;
             var loadedCount = 0;
-
-//.            var currAsset = { path: "<<PATH>>", name: "NAME" };
           
             rooms.forEach( function (room) {
-              drawAssetLoading( room.name, room.path, loadedCount, totalAssetCount);
-              loadedCount++;
+                CC.cache.addImage( room.name, room.path, function _cachedRoom() {
+                  drawAssetLoading( room.name, room.path, loadedCount, totalAssetCount);
+                  console.log("Cached room ", room.name);
+                  loadedCount++;
+                });
             });
             
             sprites.forEach( function (sprite) {
-              drawAssetLoading( sprite.name, sprite.path, loadedCount, totalAssetCount);
-              loadedCount++;
+                CC.cache.addImage( sprite.name, sprite.path, function _cachedSprite() {
+                  drawAssetLoading( sprite.name, sprite.path, loadedCount, totalAssetCount);
+                  loadedCount++;
+                });
             });
 
             sounds.forEach( function( sound ) {
-              drawAssetLoading( sound.name, sound.path, loadedCount, totalAssetCount);
+//              drawAssetLoading( sound.name, sound.path, loadedCount, totalAssetCount);
               loadedCount++;
             });
         }
