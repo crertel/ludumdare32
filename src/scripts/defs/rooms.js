@@ -5,6 +5,12 @@
     var CD = self.CD;
     CD.rooms = (function(){
         return [
+            { 
+                name: "ToBackyard",
+                path: "rooms/ToBackyard.png",
+                portals: [{to: "Kitchen"}],
+                objects: []
+            },
             {
                 name: "Kitchen",
                 path: "rooms/Kitchen.png",
