@@ -4,7 +4,22 @@
     self.CD = self.CD || {};
     var CD = self.CD;
     CD.rooms = (function(){
-        return [ 
+        return [
+            {
+                name: "Kitchen",
+                path: "rooms/Kitchen.png",
+                portals: [{to: "LivingRoom"}]
+            },
+            {
+                name: "LivingRoom",
+                path: "rooms/LivingRoom.png",
+                portals: [{to: "DoorWay", to:"Kitchen"}]
+            },
+            {
+                name: "DoorWay",
+                path: "rooms/DoorWay.png",
+                portals: [{to: "LivingRoom", to:"EntryWay"} ]
+            }, 
             {   name: "EntryWay",
                 path: "rooms/EntryWay.png",
                 portals: [{ to: "kitten" }]
