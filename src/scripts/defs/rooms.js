@@ -13,20 +13,12 @@
             {
                 name: "LivingRoom",
                 path: "rooms/LivingRoom.png",
-                portals: [{to: "DoorWay", to:"Kitchen"}]
+                portals: [{to: "DoorWay"}, { to:"Kitchen"}]
             },
             {
                 name: "DoorWay",
                 path: "rooms/DoorWay.png",
-                portals: [{to: "LivingRoom", to:"EntryWay"} ]
-            }, 
-            {   name: "EntryWay",
-                path: "rooms/EntryWay.png",
-                portals: [{ to: "kitten" }]
-            },
-            {   name: "kitten",
-                path: "rooms/kitten.jpg",
-                portals: [{ to: "EntryWay"}]
+                portals: [{to: "LivingRoom"}, {to:"EntryWay"} ]
             }
         ];
     })();

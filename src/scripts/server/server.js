@@ -55,12 +55,14 @@
                     dt = currTime - lastTime;
                     lastTime = currTime;
                     runTimeout =  self.setTimeout( run, k_logicRate );
-                    console.log("run");
+//                    console.log("run");
+                    self.postMessage( {
+                        type: "sceneUpdate",
+                        data: {
+                                room: CS.game.getSceneSnapshot()
+                            }
+                    });
                 }
-            }
-
-            function getScene() {
-                return CS.game.getScene();
             }
 
             function handleInput( evt ) {
@@ -78,8 +80,7 @@
             }
             
             return {
-                init: init,
-                getScene: getScene
+                init: init
             };
         })();
 

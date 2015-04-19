@@ -2,11 +2,13 @@
     "use strict";
     CC.server = (function(){
         var worker = null;
+        var currScene = {};
 
         function handleServerMessage( msg ){
             msg = msg.data || {};
             switch (msg.type) {
                 case "log": console.log(msg.data); break;
+                case "sceneUpdate": currScene = msg.data; break;
                 default: console.log("Unknown message ", msg); break;
             }
         }
@@ -25,7 +27,7 @@
         }
 
         function getScene(){
-            return {};
+            return currScene;
         }
 
         return {

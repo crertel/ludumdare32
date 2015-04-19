@@ -17,6 +17,7 @@
                 var rooms = Object.create(null);
                 CD.rooms.forEach( function (room) {
                     rooms[room.name] = rooms[room.name] || Object.create(null);
+                    rooms[room.name].name = room.name;
                     rooms[room.name].connections = Object.create(null);
                     room.portals.forEach( function( portal ) {
                         rooms[portal.to] = rooms[portal.to] || Object.create(null);
@@ -32,8 +33,10 @@
                 console.log("Initialized game.");
             }
 
-            function getScene() {
-                return currScene;
+            function getSceneSnapshot() {
+                var ret = Object.create(null);
+                ret.name = currScene.name;
+                return ret;
             }
 
             function update( dt ) {
@@ -44,7 +47,7 @@
             return {
                 init: init,
                 update: update,
-                getScene: getScene,
+                getSceneSnapshot: getSceneSnapshot,
                 loadWorld: loadWorld
             };
         })();
@@ -108,12 +111,14 @@
                     dt = currTime - lastTime;
                     lastTime = currTime;
                     runTimeout =  self.setTimeout( run, k_logicRate );
-                    console.log("run");
+//                    console.log("run");
+                    self.postMessage( {
+                        type: "sceneUpdate",
+                        data: {
+                                room: CS.game.getSceneSnapshot()
+                            }
+                    });
                 }
-            }
-
-            function getScene() {
-                return CS.game.getScene();
             }
 
             function handleInput( evt ) {
@@ -131,8 +136,7 @@
             }
             
             return {
-                init: init,
-                getScene: getScene
+                init: init
             };
         })();
 

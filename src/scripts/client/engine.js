@@ -115,13 +115,15 @@
             
             // draw room
             if (scene.room) {
-                var room = CC.cache.getRoom( scene.room.name );
+                var room = CC.cache.getImage( scene.room.name );
+                ctx.drawImage( room, 0,0, ctx.canvas.width, ctx.canvas.height);
             }
             
             // draw sprites
-            if (scene.sprites) {
-                scene.sprites.forEach( function _renderSprite( sprite) {
-                    //sprite
+            if (scene.objects) {
+                scene.objects.forEach( function _renderObject( object ) {
+                    var sprite = CC.cache.getImage( objecte.name );
+                    ctx.drawImage( sprite, object.x, object.y);
                 });
             }
             
