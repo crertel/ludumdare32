@@ -26,12 +26,12 @@
             var currScene = {};
 
             function init() {
-                console.log("Initialized game server.");
+                console.log("Initialized server.");
                 self.onmessage = handleMessage;
             }
 
             function getScene() {
-                return {};
+                return CS.game.getScene();
             }
 
             function handleMessage( msg ) {
@@ -46,5 +46,6 @@
         })();
 
         CS.server.init();
+        CS.game.init();
     })(self.CS);
 })(self);

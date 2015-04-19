@@ -22,7 +22,7 @@
             CC.engine.onInput( function (evt) {
                 console.log(evt);
             });
-            CC.engine.precacheAssets( CC.cache, CC.defs )            
+            CC.engine.precacheAssets( CC.cache, CD) ;    
             CC.server.init();
             CC.engine.onInput( CC.server.handleInput );
 

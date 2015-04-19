@@ -1,28 +1,33 @@
-(function(CC){
+(function(self){
     "use strict";
-    CC.defs = CC.defs || {};
-    CC.defs.rooms = (function(){
+
+    self.CD = self.CD || {};
+    var CD = self.CD;
+    CD.rooms = (function(){
         return [ 
             { name: "EntryWay", path: "rooms/EntryWay.png" },
             { name: "kitten", path: "rooms/kitten.jpg" },
         ];
     })();
-})(window.CC);
+})( (typeof window === "undefined")?self:window);
 
-(function(CC){
+(function(self){    
     "use strict";
-    CC.defs = CC.defs || {};
-    CC.defs.sprites = (function(){
+
+    self.CD = self.CD || {};    
+    var CD = self.CD;
+    CD.sprites = (function(){
         return [
         ];
     })();
-})(window.CC);
+})( (typeof window === "undefined")?self:window);
 
-(function(CC){
+(function(self){
     "use strict";
-    CC.defs = CC.defs || {};
-    CC.defs.sprites = (function(){
+    self.CD = self.CD || {};
+    var CD = self.CD;
+    CD.sprites = (function(){
         return [
         ];
     })();
-})(window.CC);
+})( (typeof window === "undefined")?self:window);

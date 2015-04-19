@@ -83,7 +83,7 @@
     "rhino"         : false,    // Rhino
     "shelljs"       : false,    // ShellJS
     "typed"         : false,    // Globals for typed array constructions
-    "worker"        : false,    // Web Workers
+    "worker"        : true,    // Web Workers
     "wsh"           : false,    // Windows Scripting Host
     "yui"           : false,    // Yahoo User Interface
 

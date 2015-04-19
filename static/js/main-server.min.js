@@ -1,3 +1,34 @@
+(function (self) {
+    "use strict";
+    self.importScripts("./main-defs.min.js");
+})(self);
+
+(function () {
+    "use strict";
+
+    self.CS = self.CS || {};
+
+    (function(CS){
+
+        CS.game = (function(){
+
+            function init() {
+                console.log("Initialized game.");
+                console.log(CD);
+            }
+
+            function getScene() {
+                return {};
+            }            
+
+            return {
+                init: init,
+                getScene: getScene
+            };
+        })();
+    })(self.CS);
+})(self);
+
 (function () {
     "use strict";
 
@@ -26,17 +57,17 @@
             var currScene = {};
 
             function init() {
-                console.log("Initialized game server.");
+                console.log("Initialized server.");
                 self.onmessage = handleMessage;
             }
 
             function getScene() {
-                return {};
+                return CS.game.getScene();
             }
 
             function handleMessage( msg ) {
                 msg = msg.data || {};
-                console.log("Server: ", msg);
+                console.log( msg );
             }
             
             return {
@@ -46,5 +77,6 @@
         })();
 
         CS.server.init();
+        CS.game.init();
     })(self.CS);
 })(self);
